@@ -6,7 +6,7 @@ using UnityEngine;
 public class Ball_Movement : MonoBehaviour
 {
 
-    public bool ballLaunched = false;
+    public bool gameStart = true;
     public Rigidbody2D ballRigidbody;
     public Vector2[] startDirections;
     public int randomNumber;
@@ -23,14 +23,23 @@ public class Ball_Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !ballLaunched)
+        if (Input.GetKeyDown(KeyCode.Space) && !gameStart)
+        {
+            //speed boost
+            ballForce = 20;
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && gameStart)
         {
             //launch ball
             randomNumber = Random.Range(0, startDirections.Length);
             ballRigidbody.AddForce(startDirections[randomNumber] * ballForce, ForceMode2D.Impulse);
-            ballLaunched = true;
+            gameStart = false;
 
         }
+
+ 
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -39,7 +48,7 @@ public class Ball_Movement : MonoBehaviour
         {
             ballRigidbody.velocity = Vector3.zero;
             transform.position = startPosition;
-            ballLaunched = false;
+            gameStart = true;
         }
     }
 }

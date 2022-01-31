@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{B732C46D-8AB1-133D-8D1F-6583ACECC04C}</ProjectGuid>
+    <ProjectGuid>{7D74A5D3-C79B-07A7-4916-442A92A60208}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -61,6 +61,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Control.cs" />
     <Compile Include="Assets\Scripts\Ball_Movement.cs" />
+    <Compile Include="Assets\Scripts\BrickCollision.cs" />
+    <Compile Include="Assets\Scripts\GameMaster.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

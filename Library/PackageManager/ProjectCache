@@ -123,6 +123,7 @@ m_ResolvedPackages:
     - 7.0.3
     - 8.0.0-pre.3
     - 8.0.0-pre.4
+    - 8.0.0
     compatible:
     - 6.0.4
     - 6.0.5
@@ -335,6 +336,7 @@ m_ResolvedPackages:
     - 6.0.2
     - 7.0.0-pre.3
     - 7.0.0-pre.4
+    - 7.0.0
     compatible:
     - 5.0.4
     - 5.0.6
@@ -536,6 +538,7 @@ m_ResolvedPackages:
     - 7.0.3
     - 8.0.0-pre.4
     - 8.0.0-pre.5
+    - 8.0.0
     compatible:
     - 6.0.1
     - 6.0.2
@@ -1087,10 +1090,12 @@ m_ResolvedPackages:
     - 1.2.2
     - 1.2.3
     - 1.2.4
+    - 1.2.5
     compatible:
     - 1.2.3
     - 1.2.4
-    verified: 1.2.4
+    - 1.2.5
+    verified: 1.2.5
   dependencies: []
   resolvedDependencies: []
   keywords: []
@@ -1639,6 +1644,7 @@ m_ResolvedPackages:
     - 1.7.3
     - 1.7.5
     - 1.7.6
+    - 1.7.7
     - 1.8.0-pre.1
     compatible:
     - 1.6.1
@@ -1647,6 +1653,7 @@ m_ResolvedPackages:
     - 1.7.3
     - 1.7.5
     - 1.7.6
+    - 1.7.7
     verified: 1.6.1
   dependencies:
   - name: com.unity.ugui

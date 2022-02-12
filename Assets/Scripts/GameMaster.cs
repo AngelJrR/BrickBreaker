@@ -44,7 +44,7 @@ public class GameMaster : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             playerLives = 5;
-                SceneManager.LoadScene("Main");
+                SceneManager.LoadScene("Level 1");
         }
         LivesTx.text = "Lives: " + playerLives;
         ScoreTx.text = "Score: " + points;

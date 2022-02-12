@@ -64,8 +64,8 @@ public class Ball_Movement : MonoBehaviour
         else
             x = 1;
         */
-        direction = ballRigidbody.velocity;
-      print(direction);
+        //direction = ballRigidbody.velocity;
+      //print(direction);
         //
         //spaced = true;
     }

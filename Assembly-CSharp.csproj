@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Control.cs" />
     <Compile Include="Assets\Scripts\Ball_Movement.cs" />
     <Compile Include="Assets\Scripts\BrickCollision.cs" />
+    <Compile Include="Assets\Scripts\StartMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

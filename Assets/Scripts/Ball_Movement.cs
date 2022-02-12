@@ -17,22 +17,26 @@ public class Ball_Movement : MonoBehaviour
     private float distance;
     public bool spaced = false;
     public bool collided = false;
-    private float x;
-    private float y;
     public Vector2 direction;
     public GameMaster gameMaster;
+    Vector3 stuff;
+
+    private Vector3 lastVelocity;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         ballRigidbody = GetComponent<Rigidbody2D>();
         ballSprite = GetComponent<SpriteRenderer>();
+        gameMaster.GetComponent<GameMaster>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        lastVelocity = ballRigidbody.velocity;
         if (Input.GetKeyDown(KeyCode.Space) && gameStart)
         {
             //launch ball
@@ -42,7 +46,7 @@ public class Ball_Movement : MonoBehaviour
             gameStart = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             ballRigidbody.velocity = Vector3.zero;
             transform.position = startPosition;
@@ -74,7 +78,7 @@ public class Ball_Movement : MonoBehaviour
             ballRigidbody.velocity = Vector3.zero;
             transform.position = startPosition;
             gameStart = true;
-            gameMaster.playerLives = gameMaster.playerLives--;
+            gameMaster.playerLives--;
         }
 
         /*
@@ -137,27 +141,30 @@ public class Ball_Movement : MonoBehaviour
             timed = true;
         }
 
+        Vector3 surfaceNormal = other.contacts[0].normal;
+     //   stuff = Vector3.Reflect(lastVelocity.normalized, surfaceNormal);
+       // ballRigidbody.velocity = stuff * 5;
             //ballForce = 10;
             //ballRigidbody.velocity = Vector3.one;
             //ballRigidbody.AddForce(direction * ballForce, ForceMode2D.Impulse);
             //print("Hi" + direction * ballForce);
 
-            /* if (!timed && !gameStart)
-            {
-                ballSprite.color = Color.red;
+        /* if (!timed && !gameStart)
+        {
+            ballSprite.color = Color.red;
 
-            }
-            */
+        }
+        */
 
-            /*
-            if (timed && !gameStart)
-            {
-                //speed boost
-                ballSprite.color = Color.blue;
-                ballForce = 50;
-                timed = false;
-            }
-            */
+        /*
+        if (timed && !gameStart)
+        {
+            //speed boost
+            ballSprite.color = Color.blue;
+            ballForce = 50;
+            timed = false;
+        }
+        */
 
 
 

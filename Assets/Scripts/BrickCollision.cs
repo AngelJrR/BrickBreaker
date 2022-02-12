@@ -13,6 +13,7 @@ public class BrickCollision : MonoBehaviour
     void Start()
     {
         brickSprite = GetComponent<SpriteRenderer>();
+        gameMaster.GetComponent<GameMaster>();
     }
 
     // Update is called once per frame
@@ -24,6 +25,7 @@ public class BrickCollision : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         numberOfHits++;
+        gameMaster.points++;
         brickSprite.color = Color.red;
         if (numberOfHits < 0)
             brickSprite.color = Color.gray;
@@ -31,7 +33,7 @@ public class BrickCollision : MonoBehaviour
         if (numberOfHits >= maxHits)
         {
             Destroy(this.gameObject);
-            gameMaster.maxLevelBricks = gameMaster.maxLevelBricks++;
+            gameMaster.maxLevelBricks++;
         }
     }
 }

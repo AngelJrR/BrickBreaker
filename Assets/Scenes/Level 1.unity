@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -426,7 +426,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6968493779579224428, guid: 257818bc9e9c67a48929255649bf3fc0, type: 3}
       propertyPath: maxHits
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6968493779579224428, guid: 257818bc9e9c67a48929255649bf3fc0, type: 3}
       propertyPath: gameMaster
@@ -597,7 +597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -737,6 +737,8 @@ MonoBehaviour:
   collided: 0
   direction: {x: 0, y: 0}
   gameMaster: {fileID: 1692822581}
+  poweredUp: 0
+  got: 0
 --- !u!58 &503967031
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -785,6 +787,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -800,6 +803,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dae6165df90a16b49961dbf4e7cadab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1012,7 +1028,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6968493779579224428, guid: 257818bc9e9c67a48929255649bf3fc0, type: 3}
       propertyPath: maxHits
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6968493779579224428, guid: 257818bc9e9c67a48929255649bf3fc0, type: 3}
       propertyPath: gameMaster
@@ -1766,6 +1782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: 0
   paddleSpeed: 8
+  level: 0
 --- !u!50 &1246164811
 Rigidbody2D:
   serializedVersion: 4
@@ -1954,7 +1971,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6968493779579224428, guid: 257818bc9e9c67a48929255649bf3fc0, type: 3}
       propertyPath: maxHits
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6968493779579224428, guid: 257818bc9e9c67a48929255649bf3fc0, type: 3}
       propertyPath: gameMaster
@@ -2621,11 +2638,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cc048b64eebc924aaf6ce51bb9db1eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLevelBricks: 0
+  LevelBricks: 0
+  maxLevelBricks: 23
   playerLives: 3
   points: 0
   LivesTx: {fileID: 470370822}
   ScoreTx: {fileID: 241344611}
+  timed: 0
+  powerUpPrefab: {fileID: 4388961259049533827, guid: ef07091b109d1ae40b6722d5c8e6c8ba, type: 3}
+  spawn: 0
 --- !u!4 &1692822582
 Transform:
   m_ObjectHideFlags: 0

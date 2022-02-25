@@ -24,16 +24,32 @@ public class BrickCollision : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+
+        if (maxHits == 100)
+        {
+            brickSprite.color = Color.green;
+            if (!gameMaster.timed)
+                numberOfHits--;
+            else
+                numberOfHits += 1000;
+        }
         numberOfHits++;
         gameMaster.points++;
-        brickSprite.color = Color.red;
+
+        if (maxHits == 2)
+            brickSprite.color = Color.red;
+
+        if (maxHits == 5)
+            brickSprite.color = Color.blue;
+
         if (numberOfHits < 0)
             brickSprite.color = Color.gray;
+
 
         if (numberOfHits >= maxHits)
         {
             Destroy(this.gameObject);
-            gameMaster.maxLevelBricks++;
+            gameMaster.LevelBricks++;
         }
     }
 }

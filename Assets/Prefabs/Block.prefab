@@ -127,6 +127,7 @@ MonoBehaviour:
   numberOfHits: 0
   maxHits: 3
   brickSprite: {fileID: 0}
+  gameMaster: {fileID: 0}
 --- !u!70 &6968493779579224429
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -140,6 +141,6 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00016872832, y: -0.0663411}
-  m_Size: {x: 1.2427394, y: 2.6385655}
+  m_Offset: {x: 0.015100925, y: -0.05148656}
+  m_Size: {x: 1.3390889, y: 3.2921987}
   m_Direction: 1

@@ -20,7 +20,8 @@ public class Ball_Movement : MonoBehaviour
     public Vector2 direction;
     public GameMaster gameMaster;
     Vector3 stuff;
-
+    public bool poweredUp;
+    public bool got;
     private Vector3 lastVelocity;
 
 
@@ -31,12 +32,13 @@ public class Ball_Movement : MonoBehaviour
         ballRigidbody = GetComponent<Rigidbody2D>();
         ballSprite = GetComponent<SpriteRenderer>();
         gameMaster.GetComponent<GameMaster>();
+        StartCoroutine(DestroyPowerUp());
     }
 
     // Update is called once per frame
     void Update()
     {
-        lastVelocity = ballRigidbody.velocity;
+        //lastVelocity = ballRigidbody.velocity;
         if (Input.GetKeyDown(KeyCode.Space) && gameStart)
         {
             //launch ball
@@ -46,7 +48,7 @@ public class Ball_Movement : MonoBehaviour
             gameStart = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             ballRigidbody.velocity = Vector3.zero;
             transform.position = startPosition;
@@ -79,6 +81,14 @@ public class Ball_Movement : MonoBehaviour
             transform.position = startPosition;
             gameStart = true;
             gameMaster.playerLives--;
+        }
+
+        if (other.gameObject.tag == "Powerup")
+        {
+            poweredUp = true;
+            Destroy(other.gameObject);
+            StartCoroutine(PowerupCountdown());
+            got = true;
         }
 
         /*
@@ -116,17 +126,44 @@ public class Ball_Movement : MonoBehaviour
             {
                 ballSprite.color = Color.green;
                 spaced = true;
+                gameMaster.timed = true;
             }
         }
     }
 
+    IEnumerator PowerupCountdown()
+    {
+        yield return new WaitForSeconds(10);
+        ballRigidbody.velocity /= 1.7f;
+        ballSprite.color = Color.white;
+        StartCoroutine(SpawnPowerUp());
+    }
 
-    
+    IEnumerator SpawnPowerUp()
+    {
+        int wait = Random.Range(6, 15);
+        yield return new WaitForSeconds(wait);
+        gameMaster.spawn = true;
+        StartCoroutine(DestroyPowerUp());
+    }
+
+    IEnumerator DestroyPowerUp()
+    {
+        if (!got)
+        {
+            int wait = Random.Range(6, 15);
+            yield return new WaitForSeconds(wait);
+            Destroy(GameObject.FindGameObjectWithTag("Powerup"));
+            StartCoroutine(SpawnPowerUp());
+        }
+        got = false;
+    }
 
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        ballSprite.color = Color.white;
+        //ballSprite.color = Color.white;
+        gameMaster.timed = false;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -136,9 +173,16 @@ public class Ball_Movement : MonoBehaviour
         {
             //speed increase
 
-            ballRigidbody.velocity *= 1.5f;
+            ballRigidbody.velocity *= 1.4f;
             spaced = false;
             timed = true;
+        }
+
+        if(poweredUp)
+        {
+            ballRigidbody.velocity *= 1.7f;
+            ballSprite.color = Color.blue;
+            poweredUp = false;
         }
 
         Vector3 surfaceNormal = other.contacts[0].normal;

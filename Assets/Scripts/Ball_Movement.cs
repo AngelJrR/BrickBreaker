@@ -19,11 +19,13 @@ public class Ball_Movement : MonoBehaviour
     public bool collided = false;
     public Vector2 direction;
     public GameMaster gameMaster;
+    public Control paddle;
     Vector3 stuff;
     public bool poweredUp;
-    public bool got;
+    public bool got = false;
     private Vector3 lastVelocity;
-
+    private bool restart = false;
+    public int value;
 
 
     // Start is called before the first frame update
@@ -32,7 +34,10 @@ public class Ball_Movement : MonoBehaviour
         ballRigidbody = GetComponent<Rigidbody2D>();
         ballSprite = GetComponent<SpriteRenderer>();
         gameMaster.GetComponent<GameMaster>();
-        StartCoroutine(DestroyPowerUp());
+        //StartCoroutine(DestroyPowerUp(10));
+        StartCoroutine(SpawnPowerUp());
+        paddle.GetComponent<Control>();
+        paddle.paddleSprite.drawMode = SpriteDrawMode.Sliced;
     }
 
     // Update is called once per frame
@@ -46,6 +51,7 @@ public class Ball_Movement : MonoBehaviour
             ballRigidbody.AddForce(startDirections[randomNumber] * ballForce, ForceMode2D.Impulse);
             //print("Nah" + startDirections[randomNumber] * ballForce);
             gameStart = false;
+            restart = true;
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -134,7 +140,15 @@ public class Ball_Movement : MonoBehaviour
     IEnumerator PowerupCountdown()
     {
         yield return new WaitForSeconds(10);
-        ballRigidbody.velocity /= 1.7f;
+        if (!restart)
+        {
+            if (value == 1)
+                ballRigidbody.velocity /= 1.7f;
+            else
+                paddle.paddleSprite.size /= 2;
+        }
+        else
+            restart = false;
         ballSprite.color = Color.white;
         StartCoroutine(SpawnPowerUp());
     }
@@ -143,26 +157,31 @@ public class Ball_Movement : MonoBehaviour
     {
         int wait = Random.Range(6, 15);
         yield return new WaitForSeconds(wait);
-        gameMaster.spawn = true;
-        StartCoroutine(DestroyPowerUp());
+        int powerup = Random.Range(1, 3);
+        print(powerup);
+        gameMaster.SpawnPowerUp(powerup);
+            StartCoroutine(DestroyPowerUp(wait));
+        value = powerup;
+        
+
     }
 
-    IEnumerator DestroyPowerUp()
+    IEnumerator DestroyPowerUp(int wait)
     {
-        if (!got)
-        {
-            int wait = Random.Range(6, 15);
+        
+           // int wait = Random.Range(6, 15);
             yield return new WaitForSeconds(wait);
             Destroy(GameObject.FindGameObjectWithTag("Powerup"));
+        if (!got)
             StartCoroutine(SpawnPowerUp());
-        }
         got = false;
+
     }
 
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        //ballSprite.color = Color.white;
+        ballSprite.color = Color.white;
         gameMaster.timed = false;
     }
 
@@ -180,8 +199,18 @@ public class Ball_Movement : MonoBehaviour
 
         if(poweredUp)
         {
-            ballRigidbody.velocity *= 1.7f;
-            ballSprite.color = Color.blue;
+            if (value == 1)
+            {
+                ballRigidbody.velocity *= 1.7f;
+                ballSprite.color = Color.blue;
+                //print("why");
+            }
+            else
+            {
+                paddle.paddleSprite.size *= 2f;
+                //print("idk");
+            }
+
             poweredUp = false;
         }
 

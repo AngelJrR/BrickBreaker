@@ -1920,6 +1920,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: 0
   paddleSpeed: 8
+  level: 0
+  paddleSprite: {fileID: 0}
 --- !u!50 &1361430556
 Rigidbody2D:
   serializedVersion: 4
@@ -2602,12 +2604,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelBricks: 0
-  maxLevelBricks: 23
+  maxLevelBricks: 22
   playerLives: 3
   points: 0
   LivesTx: {fileID: 2053477583}
   ScoreTx: {fileID: 199609540}
   timed: 0
+  powerUpSpeedPrefab: {fileID: 4388961259049533827, guid: ef07091b109d1ae40b6722d5c8e6c8ba, type: 3}
+  powerUpSizePrefab: {fileID: 482732318409947624, guid: b93b5125805cd604ea32d75335ac356d, type: 3}
+  spawn: 0
+  level: 4
 --- !u!4 &1576018435
 Transform:
   m_ObjectHideFlags: 0
@@ -2842,6 +2848,10 @@ MonoBehaviour:
   collided: 0
   direction: {x: 0, y: 0}
   gameMaster: {fileID: 1576018434}
+  paddle: {fileID: 1361430555}
+  poweredUp: 0
+  got: 0
+  value: 0
 --- !u!58 &1867715409
 CircleCollider2D:
   m_ObjectHideFlags: 0

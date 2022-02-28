@@ -737,8 +737,10 @@ MonoBehaviour:
   collided: 0
   direction: {x: 0, y: 0}
   gameMaster: {fileID: 1692822581}
+  paddle: {fileID: 1246164810}
   poweredUp: 0
   got: 0
+  value: 0
 --- !u!58 &503967031
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -769,7 +771,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.03
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -1783,6 +1785,7 @@ MonoBehaviour:
   playerInput: 0
   paddleSpeed: 8
   level: 0
+  paddleSprite: {fileID: 0}
 --- !u!50 &1246164811
 Rigidbody2D:
   serializedVersion: 4
@@ -2645,8 +2648,10 @@ MonoBehaviour:
   LivesTx: {fileID: 470370822}
   ScoreTx: {fileID: 241344611}
   timed: 0
-  powerUpPrefab: {fileID: 4388961259049533827, guid: ef07091b109d1ae40b6722d5c8e6c8ba, type: 3}
+  powerUpSpeedPrefab: {fileID: 4388961259049533827, guid: ef07091b109d1ae40b6722d5c8e6c8ba, type: 3}
+  powerUpSizePrefab: {fileID: 482732318409947624, guid: b93b5125805cd604ea32d75335ac356d, type: 3}
   spawn: 0
+  level: 0
 --- !u!4 &1692822582
 Transform:
   m_ObjectHideFlags: 0

@@ -14,9 +14,10 @@ public class GameMaster : MonoBehaviour
     public Text LivesTx;
     public Text ScoreTx;
     public bool timed;
-    public GameObject powerUpPrefab;
+    public GameObject powerUpSpeedPrefab;
+    public GameObject powerUpSizePrefab;
     public bool spawn;
-
+    public int level;
 
     private void Awake()
     {
@@ -28,7 +29,7 @@ public class GameMaster : MonoBehaviour
     {
         LivesTx.text = "Lives: " + playerLives;
         ScoreTx.text = "Score: " + points;
-        SpawnPowerUp();
+        //SpawnPowerUp();
     }
 
     // Update is called once per frame
@@ -54,22 +55,40 @@ public class GameMaster : MonoBehaviour
         LivesTx.text = "Lives: " + playerLives;
         ScoreTx.text = "Score: " + points;
 
-        if (spawn)
-            SpawnPowerUp();
-            spawn = false;
+        //if (spawn)
+            //SpawnPowerUp();
+           // spawn = false;
     }
 
     private Vector2 GenerateSpawnPos()
     {
-        float spawnY = Random.Range(-3, -1);
-        float spawnX = Random.Range(-8, 8);
+        float spawnY;
+        float spawnX;
+        if (level == 3)
+        {
+            spawnY = Random.Range(-3, 3);
+            spawnX = Random.Range(-8, 8);
+        }
+        else if (level == 4)
+        {
+            spawnY = Random.Range(3, 1);
+            spawnX = Random.Range(-8, 8);
+        }
+        else
+                {
+            spawnY = Random.Range(-3, -1);
+            spawnX = Random.Range(-8, 8);
+        }
         Vector2 position = new Vector2(spawnX, spawnY);
      return position;
     }
     
-    void SpawnPowerUp()
+    public void SpawnPowerUp(int powerup)
     {
-        Instantiate(powerUpPrefab, GenerateSpawnPos(), powerUpPrefab.transform.rotation);
+        if(powerup == 1)
+        Instantiate(powerUpSpeedPrefab, GenerateSpawnPos(), powerUpSpeedPrefab.transform.rotation);
+        else
+            Instantiate(powerUpSizePrefab, GenerateSpawnPos(), powerUpSizePrefab.transform.rotation);
     }
 
 }

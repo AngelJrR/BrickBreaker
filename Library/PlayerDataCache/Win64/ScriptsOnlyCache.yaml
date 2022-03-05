@@ -10,7 +10,6 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.IK.Editor.dll:
     - UnityEditor.U2D.IK.IKEditorManager
-    - UnityEditor.U2D.IK.IKGizmos
     Unity.2D.IK.Runtime.dll:
     - UnityEditor.U2D.IK.IKEditorManagerHelper
     Unity.2D.Tilemap.Editor.dll:
@@ -560,7 +559,7 @@ ScriptsOnlyBuild:
     className: PanelRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 22f3ded5339e5eb23921dc6fd55f7250
+      Hash: 143a3c0258d07f19d13d5dd593c368de
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameMaster
@@ -680,7 +679,7 @@ ScriptsOnlyBuild:
     className: SkeletonAsset
   - hash:
       serializedVersion: 2
-      Hash: 51913965e7a52ead4bd62c89682ffc49
+      Hash: 47008ae88f04ebd5f51b1bd429fdb167
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Control
@@ -1040,7 +1039,7 @@ ScriptsOnlyBuild:
     className: BufferManager
   - hash:
       serializedVersion: 2
-      Hash: 04d1a1bf0dd78b4e846f9036a5ad98f8
+      Hash: f229c309f00ed403ccebe7a78193b77f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Ball_Movement
@@ -1517,4 +1516,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Level 4.unity
   - Assets/Scenes/Level 5.unity
   - Assets/Scenes/LoseScene.unity
-  playerPath: D:/schoolstuff/Unity/alphas/ball.exe
+  playerPath: D:/schoolstuff/Unity/New folder/ball.exe

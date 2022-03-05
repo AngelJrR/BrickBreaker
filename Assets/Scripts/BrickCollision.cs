@@ -8,12 +8,16 @@ public class BrickCollision : MonoBehaviour
     public int maxHits;
     public SpriteRenderer brickSprite;
     public GameMaster gameMaster;
+    public AudioClip thump;
+    public AudioClip bounce;
+    private AudioSource paddleAudio;
 
     // Start is called before the first frame update
     void Start()
     {
         brickSprite = GetComponent<SpriteRenderer>();
         gameMaster.GetComponent<GameMaster>();
+        paddleAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -28,6 +32,7 @@ public class BrickCollision : MonoBehaviour
         if (maxHits == 100)
         {
             brickSprite.color = Color.green;
+            paddleAudio.PlayOneShot(bounce, .4f);
             if (!gameMaster.timed)
                 numberOfHits--;
             else
@@ -43,8 +48,10 @@ public class BrickCollision : MonoBehaviour
             brickSprite.color = Color.blue;
 
         if (numberOfHits < 0)
+        {
             brickSprite.color = Color.gray;
-
+            paddleAudio.PlayOneShot(thump, .8f);
+        }
 
         if (numberOfHits >= maxHits)
         {

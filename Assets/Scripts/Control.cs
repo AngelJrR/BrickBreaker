@@ -8,10 +8,12 @@ public class Control : MonoBehaviour
     public float paddleSpeed;
     public int level;
     public SpriteRenderer paddleSprite;
+    public PolygonCollider2D paddleCollider;
 
     private void Awake()
     {
         paddleSprite = GetComponent<SpriteRenderer>();
+        paddleCollider = GetComponent<PolygonCollider2D>();
     }
 
     // Start is called before the first frame update

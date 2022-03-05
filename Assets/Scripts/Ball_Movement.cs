@@ -26,7 +26,11 @@ public class Ball_Movement : MonoBehaviour
     private Vector3 lastVelocity;
     private bool restart = false;
     public int value;
-
+    //public AudioClip thump;
+    //public AudioClip bounce;
+    public AudioClip sizePowerup;
+    private AudioSource ballAudio;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +42,7 @@ public class Ball_Movement : MonoBehaviour
         StartCoroutine(SpawnPowerUp());
         paddle.GetComponent<Control>();
         paddle.paddleSprite.drawMode = SpriteDrawMode.Sliced;
+        ballAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -94,6 +99,8 @@ public class Ball_Movement : MonoBehaviour
             poweredUp = true;
             Destroy(other.gameObject);
             StartCoroutine(PowerupCountdown());
+            if (!gameStart && value == 2)
+                ballAudio.PlayOneShot(sizePowerup, .8f);
             got = true;
         }
 
@@ -145,7 +152,7 @@ public class Ball_Movement : MonoBehaviour
             if (value == 1)
                 ballRigidbody.velocity /= 1.7f;
             else
-                paddle.paddleSprite.size /= 2;
+                paddle.paddleSprite.size /= 2f;
         }
         else
             restart = false;
@@ -157,8 +164,8 @@ public class Ball_Movement : MonoBehaviour
     {
         int wait = Random.Range(6, 15);
         yield return new WaitForSeconds(wait);
-        int powerup = Random.Range(1, 3);
-        print(powerup);
+        int powerup = Random.Range(2, 3);
+        //print(powerup);
         gameMaster.SpawnPowerUp(powerup);
             StartCoroutine(DestroyPowerUp(wait));
         value = powerup;
@@ -208,6 +215,9 @@ public class Ball_Movement : MonoBehaviour
             else
             {
                 paddle.paddleSprite.size *= 2f;
+                //Bounds boundary = paddle.paddleCollider.bounds;
+                //oundary.size = new Vector2(boundary.size.x * 2, boundary.size.y * 2);
+                //paddle.paddleCollider.bounds.size = boundary;
                 //print("idk");
             }
 

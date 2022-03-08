@@ -6,11 +6,14 @@ using UnityEngine.SceneManagement;
 public class StartMenu : MonoBehaviour
 {
    public int level;
+   //public AudioClip Level1;
+ //  private AudioSource cameraAudio;
 
     // Start is called before the first frame update
     void Start()
     {
-
+       // cameraAudio = GetComponent<AudioSource>();
+        //cameraAudio.PlayOneShot(Level1, 1f);
     }
 
     // Update is called once per frame

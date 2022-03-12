@@ -24,13 +24,18 @@ public class Ball_Movement : MonoBehaviour
     public bool poweredUp;
     public bool got = false;
     private Vector3 lastVelocity;
-    private bool restart = false;
+    private bool restart;
     public int value;
     //public AudioClip thump;
     //public AudioClip bounce;
     public AudioClip sizePowerup;
+    public AudioClip speedPowerup;
+    public AudioClip death;
+    public AudioClip bounce;
     private AudioSource ballAudio;
-    
+    public ParticleSystem respawn;
+    public ParticleSystem sizeParticle;
+    public ParticleSystem speedParticle;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +48,8 @@ public class Ball_Movement : MonoBehaviour
         paddle.GetComponent<Control>();
         paddle.paddleSprite.drawMode = SpriteDrawMode.Sliced;
         ballAudio = GetComponent<AudioSource>();
+        //paddle.paddleCollider.autoTiling = true;
+        restart = false;
     }
 
     // Update is called once per frame
@@ -56,7 +63,7 @@ public class Ball_Movement : MonoBehaviour
             ballRigidbody.AddForce(startDirections[randomNumber] * ballForce, ForceMode2D.Impulse);
             //print("Nah" + startDirections[randomNumber] * ballForce);
             gameStart = false;
-            restart = true;
+            
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -92,6 +99,9 @@ public class Ball_Movement : MonoBehaviour
             transform.position = startPosition;
             gameStart = true;
             gameMaster.playerLives--;
+            respawn.Play();
+            restart = true;
+            ballAudio.PlayOneShot(death, .8f);
         }
 
         if (other.gameObject.tag == "Powerup")
@@ -101,6 +111,8 @@ public class Ball_Movement : MonoBehaviour
             StartCoroutine(PowerupCountdown());
             if (!gameStart && value == 2)
                 ballAudio.PlayOneShot(sizePowerup, .8f);
+            else if(!gameStart && value == 1)
+                ballAudio.PlayOneShot(speedPowerup, .8f);
             got = true;
         }
 
@@ -117,6 +129,7 @@ public class Ball_Movement : MonoBehaviour
         {
             ballRigidbody.velocity /= 1.3f;
             timed = false;
+            paddle.paddleSpeed -= 1;
             /*
             if (other.gameObject.tag == "Respawn")
             {
@@ -147,16 +160,25 @@ public class Ball_Movement : MonoBehaviour
     IEnumerator PowerupCountdown()
     {
         yield return new WaitForSeconds(10);
+        print("why");
         if (!restart)
         {
             if (value == 1)
+            {
                 ballRigidbody.velocity /= 1.7f;
+                print("asdjkasjdljwqld qw");
+            }
             else
+            {
                 paddle.paddleSprite.size /= 2f;
+                paddle.paddleCollider.size /= 2f;
+                print("dsasadasdsadsa");
+            }
         }
         else
+            print("idk");
             restart = false;
-        ballSprite.color = Color.white;
+        //ballSprite.color = Color.white;
         StartCoroutine(SpawnPowerUp());
     }
 
@@ -164,13 +186,11 @@ public class Ball_Movement : MonoBehaviour
     {
         int wait = Random.Range(6, 15);
         yield return new WaitForSeconds(wait);
-        int powerup = Random.Range(2, 3);
+        int powerup = Random.Range(1, 3);
         //print(powerup);
         gameMaster.SpawnPowerUp(powerup);
             StartCoroutine(DestroyPowerUp(wait));
         value = powerup;
-        
-
     }
 
     IEnumerator DestroyPowerUp(int wait)
@@ -188,13 +208,13 @@ public class Ball_Movement : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        ballSprite.color = Color.white;
+        ballSprite.color = new Color32(57,215,221,255);
         gameMaster.timed = false;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-
+        ballAudio.PlayOneShot(bounce, .8f);
         if (!gameStart && spaced)
         {
             //speed increase
@@ -202,6 +222,7 @@ public class Ball_Movement : MonoBehaviour
             ballRigidbody.velocity *= 1.4f;
             spaced = false;
             timed = true;
+            paddle.paddleSpeed += 1;
         }
 
         if(poweredUp)
@@ -209,15 +230,18 @@ public class Ball_Movement : MonoBehaviour
             if (value == 1)
             {
                 ballRigidbody.velocity *= 1.7f;
-                ballSprite.color = Color.blue;
+                //ballSprite.color = Color.blue;
+                speedParticle.Play();
                 //print("why");
             }
             else
             {
+                sizeParticle.Play();
                 paddle.paddleSprite.size *= 2f;
+                paddle.paddleCollider.size *= 2f;
                 //Bounds boundary = paddle.paddleCollider.bounds;
                 //oundary.size = new Vector2(boundary.size.x * 2, boundary.size.y * 2);
-                //paddle.paddleCollider.bounds.size = boundary;
+
                 //print("idk");
             }
 

@@ -46,12 +46,51 @@ public class StartMenu : MonoBehaviour
     {
         SceneManager.LoadScene("How To Play");
     }
+    public void Story()
+    {
+        SceneManager.LoadScene("Story");
+    }
 
     public void QuitGame()
     {
         Application.Quit();
         Debug.Log("quit");
     }
+
+    public void restart()
+    {
+        if (level == 1)
+        {
+            //level = 2;
+            SceneManager.LoadScene("Level 1");
+            // level = 2;
+        }
+
+        else if (level == 2)
+        {
+            // level = 3;
+            SceneManager.LoadScene("Level 2");
+
+        }
+
+        else if (level == 3)
+        {
+            // level = 4;
+            SceneManager.LoadScene("Level 3");
+
+        }
+
+        else if (level == 4)
+        {
+            SceneManager.LoadScene("Level 4");
+        }
+
+        else
+        {
+            SceneManager.LoadScene("Level 5");
+        }
+    }
+
     public void nextLevel()
     {
         if(level == 1)

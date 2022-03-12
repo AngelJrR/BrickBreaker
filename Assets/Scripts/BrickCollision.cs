@@ -9,8 +9,11 @@ public class BrickCollision : MonoBehaviour
     public SpriteRenderer brickSprite;
     public GameMaster gameMaster;
     public AudioClip thump;
-    public AudioClip bounce;
+   // public AudioClip bounce;
     private AudioSource paddleAudio;
+    public ParticleSystem dustParticles;
+    public ParticleSystem destroyParticles;
+    public DestroySound destroyed;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +21,7 @@ public class BrickCollision : MonoBehaviour
         brickSprite = GetComponent<SpriteRenderer>();
         gameMaster.GetComponent<GameMaster>();
         paddleAudio = GetComponent<AudioSource>();
+        destroyed.GetComponent<DestroySound>();
     }
 
     // Update is called once per frame
@@ -29,15 +33,19 @@ public class BrickCollision : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
 
+        // if (gameObject != null)
+        dustParticles.Play();
+
         if (maxHits == 100)
         {
             brickSprite.color = Color.green;
-            paddleAudio.PlayOneShot(bounce, .4f);
+            //paddleAudio.PlayOneShot(bounce, .4f);
             if (!gameMaster.timed)
                 numberOfHits--;
             else
                 numberOfHits += 1000;
         }
+
         numberOfHits++;
         gameMaster.points++;
 
@@ -55,8 +63,15 @@ public class BrickCollision : MonoBehaviour
 
         if (numberOfHits >= maxHits)
         {
-            Destroy(this.gameObject);
+            //Instantiate(destroyParticles, this.transform.position, this.transform.rotation);
+            destroyed.Sounds();
+            destroyParticles.transform.parent = null;
+            destroyParticles.Play();
             gameMaster.LevelBricks++;
+            Destroy(gameObject);
+
         }
+ 
+
     }
 }

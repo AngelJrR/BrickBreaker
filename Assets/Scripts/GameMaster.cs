@@ -49,7 +49,7 @@ public class GameMaster : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            playerLives = 3;
+            playerLives = 300;
         }
         
         LivesTx.text = "Lives: " + playerLives;
@@ -71,7 +71,7 @@ public class GameMaster : MonoBehaviour
         }
         else if (level == 4)
         {
-            spawnY = Random.Range(3, 1);
+            spawnY = Random.Range(-3, 1);
             spawnX = Random.Range(-8, 8);
         }
         else
